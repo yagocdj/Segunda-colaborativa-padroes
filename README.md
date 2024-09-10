@@ -3,4 +3,4 @@ Repositório relativo à segunda atividade colaborativa da disciplina de Padrõe
 
 ## Uso dos padrões de projeto
 
-TODO - adicionar quais foram os padrões de projeto utilzados e as justificadas para tais usos
+TODO - adicionar quais foram os padrões de projeto utilzados e as justificadas para tais usos.
