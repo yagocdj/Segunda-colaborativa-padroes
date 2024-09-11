@@ -10,10 +10,10 @@ public class MainBaralho
    {
 	  
       Baralho baralho = new Baralho();
-      //myDeckOfCards.shuffle(); // coloca Cards em ordem aleat�ria
+      //myDeckOfCards.shuffle(); // coloca Cards em ordem aleatória
  
       
-      // imprime todas as 52 cartas na ordem em que elas s�o distribu�das
+      // imprime todas as 52 cartas na ordem em que elas são distribuídas
       System.out.println( "Size: " + baralho.size());
       System.out.println( baralho);
 

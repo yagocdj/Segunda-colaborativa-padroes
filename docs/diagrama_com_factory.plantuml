@@ -1,0 +1,89 @@
+@startuml diagrama_com_factory
+
+'--------- Produto ---------------
+abstract class Baralho {
+    # List<Carta> deck
+
+    + shuffle() : void
+    + dealCard() : Card
+    + size() : int
+    + toString() : String
+    + hasCard() : boolean
+}
+
+class BaralhoTradicional {
+    
+    - NUMBER_OF_CARDS : int
+    - NUMBER_OF_CARDS_BY_SUIT : int
+    - randomNumbers : Random
+
+    + BaralhoTradicional()
+}
+
+class BaralhoUno {
+    + BaralhoUno()
+
+}
+
+'------------------------------
+
+'------------Creator-----------
+
+abstract class BaralhoCreator {
+    {abstract} createBaralho() : 
+}
+
+class BaralhoTradicionalCreator {
+    + createBaralho() : Baralho
+}
+
+class BaralhoUnoCreator {
+    + createBaralho() : Baralho
+}
+
+'-------------------------------
+
+'------------Carta--------------
+class Carta {
+    - face : String
+    - naipe : String
+    - cor : Cor
+    - valor : int
+
+    + Carta(face: String, naipe : String, valor : int)
+    + Carta(face : String, naipe : String, valor : int, cor : Cor)
+    + getFace() : String
+    + getValor() : int
+    + getCor() : Cor
+    + getNaipe() : String
+    + setValue(value : int) : void
+    + toString() : String
+}
+
+enum Cor {
+	VERMELHO
+	PRETO
+	RESET
+	
+	- ansiCode : String;
+	- value : String;
+
+	+ Cor(ansiCode : String, cor : String)
+	+ ansiCode() : String
+	+ getValue() : String
+}
+
+'--------------------------------------------------
+
+
+BaralhoTradicional ..|> Baralho
+BaralhoUno ..|> Baralho
+
+BaralhoTradicionalCreator --|> BaralhoCreator
+BaralhoUnoCreator --|> BaralhoCreator
+
+BaralhoCreator --> Baralho
+
+Baralho *-- Carta : "possui"
+
+@enduml
