@@ -1,18 +1,16 @@
 @startuml diagrama_com_factory
 
 '--------- Produto ---------------
-abstract class Baralho {
-    # List<Carta> deck
-
-    + shuffle() : void
-    + dealCard() : Card
-    + size() : int
-    + toString() : String
-    + hasCard() : boolean
+interface Baralho {
+    + {abstract} shuffle() : void
+    + {abstract} dealCard() : Card
+    + {abstract} size() : int
+    + {abstract} toString() : String
+    + {abstract} hasCard() : boolean
 }
 
 class BaralhoTradicional {
-    
+    - deck : List<CartaBaralho>
     - NUMBER_OF_CARDS : int
     - NUMBER_OF_CARDS_BY_SUIT : int
     - randomNumbers : Random
@@ -30,7 +28,7 @@ class BaralhoUno {
 '------------Creator-----------
 
 abstract class BaralhoCreator {
-    {abstract} createBaralho() : 
+    + {abstract} createBaralho() : Baralho
 }
 
 class BaralhoTradicionalCreator {
@@ -44,20 +42,47 @@ class BaralhoUnoCreator {
 '-------------------------------
 
 '------------Carta--------------
-class Carta {
+class CartaBaralho {
     - face : String
     - naipe : String
     - cor : Cor
     - valor : int
 
-    + Carta(face: String, naipe : String, valor : int)
-    + Carta(face : String, naipe : String, valor : int, cor : Cor)
+    + CartaBaralho(face: String, naipe : String, valor : int)
+    + CartaBaralho(face : String, naipe : String, valor : int, cor : Cor)
     + getFace() : String
     + getValor() : int
     + getCor() : Cor
     + getNaipe() : String
     + setValue(value : int) : void
     + toString() : String
+}
+
+interface CartaBuilder {
+    + {abstract} reset() : void
+    + {abstract} definirCor() : void
+    + {abstract} definirRepresentacaoEmString : void
+    + {abstract} definirValor() : void
+}
+
+class CartaBaralhoBuilder {
+    - resultado: CartaBaralho
+    
+    + reset() : void
+    + definirCor() : void
+    + definirRepresentacaoEmString() : void
+    + definirValor() : void
+    + obterResultado() : CartaBaralho
+}
+
+class CartaUnoBuilder {
+    - resultado: CartaUno
+    
+    + reset() : void
+    + definirCor() : void
+    + definirRepresentacaoEmString() : void
+    + definirValor() : void
+    + obterResultado() : CartaUno
 }
 
 enum Cor {
