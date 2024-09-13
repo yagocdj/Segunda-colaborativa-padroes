@@ -1,1 +1,3 @@
 Um baralho tem várias cartas
+
+A face do UNO será a habilidade (exemplo: curinga)

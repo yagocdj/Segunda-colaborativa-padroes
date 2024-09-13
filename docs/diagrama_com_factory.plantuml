@@ -1,16 +1,19 @@
 @startuml diagrama_com_factory
 
 '--------- Produto ---------------
-interface Baralho {
+abstract class Baralho {
+    # cartaDirector : CartaDirector 
+    # cartaBuilder : CartaBuilder
+    # deck : Stack<CartaBaralho>
+
     + {abstract} shuffle() : void
     + {abstract} dealCard() : Card
     + {abstract} size() : int
     + {abstract} toString() : String
-    + {abstract} hasCard() : boolean
+    + {abstract} hasCard() : boolean    
 }
 
 class BaralhoTradicional {
-    - deck : List<CartaBaralho>
     - NUMBER_OF_CARDS : int
     - NUMBER_OF_CARDS_BY_SUIT : int
     - randomNumbers : Random
@@ -58,11 +61,25 @@ class CartaBaralho {
     + toString() : String
 }
 
+class CartaUno {
+    - face : String
+    - cor: Cor
+    - valor : int
+
+    + CartaUno(face: String, valor: int, cor : Cor)
+    + getFace() : String
+    + getValor() : int
+    + getNaipe() : String
+    + setValue(value : int) : void
+    + toString() : String
+}
+
 interface CartaBuilder {
     + {abstract} reset() : void
     + {abstract} definirCor() : void
-    + {abstract} definirRepresentacaoEmString : void
+    + {abstract} definirRepresentacaoEmString() : void
     + {abstract} definirValor() : void
+    + {abstract} definirFace() ; void
 }
 
 class CartaBaralhoBuilder {
@@ -85,9 +102,24 @@ class CartaUnoBuilder {
     + obterResultado() : CartaUno
 }
 
+class CartaDirector {
+    - cartaBuilder : CartaBuilder
+
+    + CartaDirector(cartaBuilder : CartaBuilder)
+    + makeCarta(tipoCarta : TipoCarta) : void
+}
+
+enum TipoCarta{
+    UNO
+    TRADICIONAL
+}
+
 enum Cor {
-	VERMELHO
 	PRETO
+    VERMELHO
+	AMARELO
+    AZUL
+    VERDE
 	RESET
 	
 	- ansiCode : String;
@@ -100,7 +132,6 @@ enum Cor {
 
 '--------------------------------------------------
 
-
 BaralhoTradicional ..|> Baralho
 BaralhoUno ..|> Baralho
 
@@ -109,6 +140,15 @@ BaralhoUnoCreator --|> BaralhoCreator
 
 BaralhoCreator --> Baralho
 
-Baralho *-- Carta : "possui"
+BaralhoTradicional *-- CartaBaralho : "possui"
+
+CartaUnoBuilder ..|> CartaBuilder
+CartaBaralhoBuilder ..|> CartaBuilder
+
+CartaBaralho --|> Cor
+CartaUno --|> Cor
+
+CartaDirector *-- CartaBuilder
+CartaDirector ..> TipoCarta
 
 @enduml
