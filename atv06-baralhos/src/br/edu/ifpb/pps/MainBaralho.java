@@ -1,4 +1,8 @@
-package br.edu.ifpb.pps.baralho;
+package br.edu.ifpb.pps;
+
+import br.edu.ifpb.pps.baralho.Baralho;
+import br.edu.ifpb.pps.baralho.BaralhoTradicional;
+import br.edu.ifpb.pps.carta.CartaTradicional;
 
 // Fig. 7.11: DeckOfCardsTest.java
 // Aplicativo de embaralhar e distribuir cartas.
@@ -9,7 +13,7 @@ public class MainBaralho
    public static void main( String args[] )
    {
 	  
-      Baralho baralho = new Baralho();
+      Baralho<CartaTradicional> baralho = new BaralhoTradicional();
       //myDeckOfCards.shuffle(); // coloca Cards em ordem aleatória
  
       

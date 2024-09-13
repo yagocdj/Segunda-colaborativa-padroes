@@ -4,7 +4,6 @@
 abstract class Baralho {
     # cartaDirector : CartaDirector 
     # cartaBuilder : CartaBuilder
-    # deck : Stack<CartaBaralho>
 
     + {abstract} shuffle() : void
     + {abstract} dealCard() : Card
@@ -17,11 +16,14 @@ class BaralhoTradicional {
     - NUMBER_OF_CARDS : int
     - NUMBER_OF_CARDS_BY_SUIT : int
     - randomNumbers : Random
+    - deck : Stack<CartaTradicional>
+
 
     + BaralhoTradicional()
 }
 
 class BaralhoUno {
+    - deck : Stack<CartaUno>
     + BaralhoUno()
 
 }
@@ -45,14 +47,14 @@ class BaralhoUnoCreator {
 '-------------------------------
 
 '------------Carta--------------
-class CartaBaralho {
+class CartaTradicional {
     - face : String
     - naipe : String
     - cor : Cor
     - valor : int
 
-    + CartaBaralho(face: String, naipe : String, valor : int)
-    + CartaBaralho(face : String, naipe : String, valor : int, cor : Cor)
+    + CartaTradicional(face: String, naipe : String, valor : int)
+    + CartaTradicional(face : String, naipe : String, valor : int, cor : Cor)
     + getFace() : String
     + getValor() : int
     + getCor() : Cor
@@ -69,7 +71,6 @@ class CartaUno {
     + CartaUno(face: String, valor: int, cor : Cor)
     + getFace() : String
     + getValor() : int
-    + getNaipe() : String
     + setValue(value : int) : void
     + toString() : String
 }
@@ -82,14 +83,14 @@ interface CartaBuilder {
     + {abstract} definirFace() ; void
 }
 
-class CartaBaralhoBuilder {
-    - resultado: CartaBaralho
+class CartaTradicionalBuilder {
+    - resultado: CartaTradicional
     
     + reset() : void
     + definirCor() : void
     + definirRepresentacaoEmString() : void
     + definirValor() : void
-    + obterResultado() : CartaBaralho
+    + obterResultado() : CartaTradicional
 }
 
 class CartaUnoBuilder {
@@ -130,6 +131,10 @@ enum Cor {
 	+ getValue() : String
 }
 
+class MainBaralho {
+    {static} main(args : String[]) : void
+}
+
 '--------------------------------------------------
 
 BaralhoTradicional ..|> Baralho
@@ -140,15 +145,20 @@ BaralhoUnoCreator --|> BaralhoCreator
 
 BaralhoCreator --> Baralho
 
-BaralhoTradicional *-- CartaBaralho : "possui"
+BaralhoTradicional *-- CartaTradicional : "possui"
 
 CartaUnoBuilder ..|> CartaBuilder
-CartaBaralhoBuilder ..|> CartaBuilder
+CartaTradicionalBuilder ..|> CartaBuilder
 
-CartaBaralho --|> Cor
+CartaTradicional --|> Cor
 CartaUno --|> Cor
 
-CartaDirector *-- CartaBuilder
+CartaDirector --> CartaBuilder
 CartaDirector ..> TipoCarta
+
+Baralho --> CartaDirector
+
+CartaUnoBuilder --> CartaUno
+CartaTradicionalBuilder --> CartaTradicional
 
 @enduml

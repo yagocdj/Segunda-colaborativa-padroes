@@ -1,4 +1,4 @@
-package br.edu.ifpb.pps.baralho;
+package br.edu.ifpb.pps.enums;
 
 
 public enum Cor {
@@ -7,6 +7,7 @@ public enum Cor {
 	PRETO("\u001B[30m", "preto"),
 	AMARELO("\u001B[33m", "amarelo"),
 	VERDE("\u001B[32m", "verde"),
+	AZUL("\u001B[34m", "azul"),
 	RESET("\u001B[0m", "reset");
 	
 	private final String ansiCode;
