@@ -1,3 +1,11 @@
 Um baralho tem várias cartas
 
 A face do UNO será a habilidade (exemplo: curinga)
+
+Eu teria que ter vários builders de cartas
+
+Baralho possui muita informação implícita
+    - O builder poderia ser utilizado nele
+    - O baralho tem uma lógica complexa que pode ser encapsulada
+
+Até agora, foi decidido que o baralho será criado por um builder e a carta, um factory method.
