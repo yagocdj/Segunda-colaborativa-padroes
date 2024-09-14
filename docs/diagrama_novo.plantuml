@@ -1,96 +1,98 @@
 @startuml diagrama_com_factory
 
+'--------------------- Classes Baralho ---------------------
+abstract class Baralho {
+    - deck: List<Carta>
+
+    + embaralhar() : void
+    + distribuir() : Carta
+    + adicionarCarta(carta: Carta) : void
+    + obterTamanho() : int
+}
+
 class BaralhoTradicional {
-    - NUMBER_OF_CARDS : int
-    - NUMBER_OF_CARDS_BY_SUIT : int
-    - randomNumbers : Random
-    - deck : Stack<CartaTradicional>
-
-
     + BaralhoTradicional()
 }
 
 class BaralhoUNO {
-    - deck : Stack<CartaUNO>
-   
     + BaralhoUNO()
 }
 
-'--------------------- Carta ---------------------
+'--------------------- Classes Carta ---------------------
 
-class CartaTradicional {
+abstract class Carta {
     - face : String
-    - naipe : String
     - cor : Cor
     - valor : int
 
-    + CartaTradicional(face: String, naipe : String, valor : int)
-    + CartaTradicional(face : String, naipe : String, valor : int, cor : Cor)
+    + Carta(face: String, valor: int, cor : Cor)
     + getFace() : String
-    + getValor() : int
-    + getCor() : Cor
+    + {abstract} getValor() : int
+    + {abstract} getCor() : Cor
+    + {abstract} toString() : String
+}
+
+class CartaTradicional extends Carta {
+    - naipe : String
+
+    + CartaTradicional(face: String, naipe : String, valor : int, cor : Cor)
     + getNaipe() : String
-    + setValue(value : int) : void
-    + toString() : String
 }
 
-class CartaUNO {
-    - face : String
-    - cor: Cor
-    - valor : int
-
+class CartaUNO extends Carta {
     + CartaUNO(face: String, valor: int, cor : Cor)
-    + getFace() : String
-    + getValor() : int
-    + setValue(value : int) : void
-    + toString() : String
 }
 
-enum TipoCarta{
+enum TipoBaralho {
     UNO
     TRADICIONAL
 }
 
 enum Cor {
-	PRETO
+    PRETO
     VERMELHO
-	AMARELO
+    AMARELO
     AZUL
     VERDE
-	RESET
-	
-	- ansiCode : String;
-	- value : String;
+    RESET
 
-	+ Cor(ansiCode : String, cor : String)
-	+ ansiCode() : String
-	+ getValue() : String
+    - ansiCode : String
+    - value : String
+
+    + Cor(ansiCode : String, cor : String)
+    + ansiCode() : String
+    + getValue() : String
 }
 
-'--------------------- Builder ---------------------
+'--------------------- Builder Pattern ---------------------
 
 interface BaralhoBuilder {
-    + {abstract} redefinir() : void
-    + {abstract} definirFaces() : void
-    + {abstract} criarDeckDeCartas() : void
-    + {abstract} criarRandomizador() : void
-    + {abstract} preencherBaralho() : void
+    + redefinir() : void
+    + preencherBaralho() : void
+    + obterResultado() : Baralho
 }
 
 class BaralhoTradicionalBuilder {
+    - fabrica : CartaFactory
+
+    + BaralhoTradicionalBuilder(fabrica: CartaFactory)
     + redefinir() : void
-    + definirFaces() : void
-    + criarDeckDeCartas() : void
-    + criarRandomizador() : void
+    - definirFaces() : void
+    - criarDeckDeCartas() : void
+    - criarRandomizador() : void
     + preencherBaralho() : void
     + obterResultado() : BaralhoTradicional
 }
 
 class BaralhoUNOBuilder {
+    - fabrica : CartaFactory
+
+    - definirFaces() : void
+    - criarRandomizador() : void
+    - criarDeckDeCartas() : void
+
+    + BaralhoUNOBuilder(fabrica: CartaFactory)
     + redefinir() : void
-    + definirFaces() : void
-    + criarDeckDeCartas() : void
-    + criarRandomizador() : void
     + preencherBaralho() : void
     + obterResultado() : BaralhoUNO
 }
@@ -98,34 +100,49 @@ class BaralhoUNOBuilder {
 class BaralhoDirector {
     - baralhoBuilder : BaralhoBuilder
 
-    + BaralhoDirector(baralhoBuilder : BaralhoBuilder)
-    + construirBaralho(TipoBaralho tipo) : void
+    + BaralhoDirector()
+    + construirBaralho(tipo : TipoBaralho) : void
 }
 
-'--------------------- Factory method ---------------------
+'--------------------- Factory Method ---------------------
 
-interface Carta {
-    + {abstract} definirFace() : void
-    + {abstract} definirCor() : void
-    + {abstract} definirValor() : void
+interface CartaFactory {
+    + criarCarta(face : String, valor : int, cor : Cor) : Carta
+}
+
+class CartaTradicionalFactory {
+    + criarCarta(face : String, valor : int, cor : Cor) : CartaTradicional
+}
+
+class CartaUNOFactory {
+    + criarCarta(face : String, valor : int, cor : Cor) : CartaUNO
 }
 
 
 '--------------------- Cliente ---------------------
 
 class MainBaralho {
-    {static} main(args : String[]) : void
+    + {static} main(args : String[]) : void
 }
 
 '--------------------- Relacionamentos ---------------------
 
-BaralhoDirector --> BaralhoBuilder
 MainBaralho --> BaralhoDirector
+BaralhoDirector --> BaralhoBuilder
+
+BaralhoTradicional ..|> Baralho
+BaralhoUNO ..|> Baralho
 
 BaralhoTradicionalBuilder ..|> BaralhoBuilder
 BaralhoUNOBuilder ..|> BaralhoBuilder
 
-CartaUNO ..|> Carta
-CartaTradicional ..|> Carta
+CartaTradicionalFactory ..|> CartaFactory
+CartaUNOFactory ..|> CartaFactory
+
+CartaFactory --> Carta
+
+BaralhoTradicionalBuilder --> BaralhoTradicional
+BaralhoUNOBuilder --> BaralhoUNO
+
 
 @enduml
