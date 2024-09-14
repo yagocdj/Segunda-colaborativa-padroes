@@ -1,16 +1,5 @@
 @startuml diagrama_com_factory
 
-abstract class Baralho {
-    # cartaDirector : CartaDirector 
-    # cartaBuilder : CartaBuilder
-
-    + {abstract} shuffle() : void
-    + {abstract} dealCard() : Card
-    + {abstract} size() : int
-    + {abstract} toString() : String
-    + {abstract} hasCard() : boolean    
-}
-
 class BaralhoTradicional {
     - NUMBER_OF_CARDS : int
     - NUMBER_OF_CARDS_BY_SUIT : int
@@ -22,12 +11,13 @@ class BaralhoTradicional {
 }
 
 class BaralhoUNO {
-    - deck : Stack<CartaUno>
+    - deck : Stack<CartaUNO>
+   
     + BaralhoUNO()
-
 }
 
-'------------Carta--------------
+'--------------------- Carta ---------------------
+
 class CartaTradicional {
     - face : String
     - naipe : String
@@ -44,12 +34,12 @@ class CartaTradicional {
     + toString() : String
 }
 
-class CartaUno {
+class CartaUNO {
     - face : String
     - cor: Cor
     - valor : int
 
-    + CartaUno(face: String, valor: int, cor : Cor)
+    + CartaUNO(face: String, valor: int, cor : Cor)
     + getFace() : String
     + getValor() : int
     + setValue(value : int) : void
@@ -112,6 +102,15 @@ class BaralhoDirector {
     + construirBaralho(TipoBaralho tipo) : void
 }
 
+'--------------------- Factory method ---------------------
+
+interface Carta {
+    + {abstract} definirFace() : void
+    + {abstract} definirCor() : void
+    + {abstract} definirValor() : void
+}
+
+
 '--------------------- Cliente ---------------------
 
 class MainBaralho {
@@ -122,5 +121,11 @@ class MainBaralho {
 
 BaralhoDirector --> BaralhoBuilder
 MainBaralho --> BaralhoDirector
+
+BaralhoTradicionalBuilder ..|> BaralhoBuilder
+BaralhoUNOBuilder ..|> BaralhoBuilder
+
+CartaUNO ..|> Carta
+CartaTradicional ..|> Carta
 
 @enduml
