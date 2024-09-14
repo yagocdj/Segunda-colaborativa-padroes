@@ -3,7 +3,6 @@ package baralho;
 import builder.CartaDirector;
 import builder.CartaUnoBuilder;
 import carta.CartaUno;
-import enums.TipoCarta;
 
 public class BaralhoUno extends Baralho<CartaUno> {
 

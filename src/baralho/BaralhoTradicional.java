@@ -29,9 +29,8 @@ public class BaralhoTradicional extends Baralho<CartaTradicional> {
                     new CartaTradicional(
                             faces[count % NUMBER_OF_CARDS_BY_SUIT],
                             naipe[count / NUMBER_OF_CARDS_BY_SUIT],
-                            0,
-                            naipe[count / NUMBER_OF_CARDS_BY_SUIT] == "\u2665"
-                                    || naipe[count / NUMBER_OF_CARDS_BY_SUIT] == "\u2666"
+                            naipe[count / NUMBER_OF_CARDS_BY_SUIT].equals("\u2665")
+                                    || naipe[count / NUMBER_OF_CARDS_BY_SUIT].equals("\u2666")
                                             ? Cor.VERMELHO
                                             : Cor.PRETO));
         }

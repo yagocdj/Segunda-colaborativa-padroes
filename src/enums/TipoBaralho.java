@@ -1,7 +1,7 @@
 package enums;
 
 
-public enum TipoCarta {
+public enum TipoBaralho {
 	TRADICIONAL,
 	UNO;
 }

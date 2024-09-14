@@ -5,48 +5,20 @@ package carta;
 
 import enums.Cor;
 
-public class CartaTradicional {
-   private String face; // face da carta ("Ace", "Deuce", ...)
-   private String naipe; // naipe da carta ("Hearts", "Diamonds", ...)
-   private Cor cor;
-   private int valor;
+public class CartaTradicional extends Carta {
+    private String naipe; // naipe da carta ("Hearts", "Diamonds", ...)
 
-   // construtor de dois argumentos inicializa face e naipe da carta
-   public CartaTradicional(String face, String naipe, int valor) {
-      this(face, naipe, valor, Cor.PRETO);
-   } // fim do construtor Card de dois argumentos
+    public CartaTradicional(String face, String naipe, Cor cor) {
+        super(face, cor, 0);
+        this.naipe = naipe;
+    }
 
-   // construtor de dois argumentos inicializa face e naipe da carta
-   public CartaTradicional(String face, String naipe, int valor, Cor cor) {
-      this.face = face; // inicializa face da carta
-      this.naipe = naipe; // inicializa naipe da carta
-      this.valor = valor;
-      this.cor = cor;
-   } // fim do construtor Card de dois argumentos
+    public String getNaipe() {
+        return naipe;
+    }
 
-   public String getFace() {
-      return face;
-   }
-
-   public int getValor() {
-      return valor;
-   }
-
-   public Cor getCor() {
-      return cor;
-   }
-
-   public String getNaipe() {
-      return naipe;
-   }
-
-   public void setValue(int value) {
-      this.valor = value;
-   }
-
-   // retorna representação String de Card
-   public String toString() {
-      return String.format("%6s", face) + " de " + cor.ansiCode() + naipe + Cor.RESET.ansiCode() + ", valor " + valor;
-   }
+    public String toString() {
+        return String.format("%6s", super.getFace()) + " de " + super.getCor().ansiCode() + naipe + Cor.RESET.ansiCode() + ", valor " + super.getValor();
+    }
 
 }
