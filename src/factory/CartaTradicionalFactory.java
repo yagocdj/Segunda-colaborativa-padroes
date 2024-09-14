@@ -3,11 +3,12 @@ package factory;
 import carta.Carta;
 import carta.CartaTradicional;
 import enums.Cor;
+import enums.Naipe;
 
 public class CartaTradicionalFactory implements CartaFactory {
 
-    public Carta criarCarta(String face, int valor, Cor cor, String naipe) {
-        return new CartaTradicional(face, "naipe", cor);
+    public Carta criarCarta(String face, int valor, Cor cor, Naipe naipe) {
+        return new CartaTradicional(face, naipe, cor);
     }
 
     @Override

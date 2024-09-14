@@ -1,24 +1,22 @@
 package carta;
 
-
-// Classe Card representa uma carta de baralho.
-
 import enums.Cor;
+import enums.Naipe;
 
 public class CartaTradicional extends Carta {
-    private String naipe; // naipe da carta ("Hearts", "Diamonds", ...)
+    private Naipe naipe; // naipe da carta ("Hearts", "Diamonds", ...)
 
-    public CartaTradicional(String face, String naipe, Cor cor) {
+    public CartaTradicional(String face, Naipe naipe, Cor cor) {
         super(face, cor, 0);
         this.naipe = naipe;
     }
 
-    public String getNaipe() {
+    public Naipe getNaipe() {
         return naipe;
     }
 
     public String toString() {
-        return String.format("%6s", super.getFace()) + " de " + super.getCor().ansiCode() + naipe + Cor.RESET.ansiCode() + ", valor " + super.getValor();
+        return String.format("%6s", super.getFace()) + " de " + super.getCor().ansiCode() + naipe.getSymbol() + Cor.RESET.ansiCode() + ", valor " + super.getValor();
     }
 
 }

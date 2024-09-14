@@ -28,7 +28,5 @@ public abstract class Carta {
     }
 
     @Override
-    public String toString() {
-        return String.format("%6s", face) + " de " + cor.ansiCode()  + Cor.RESET.ansiCode() + ", valor " + valor;
-    }
+    public abstract  String toString();
 }

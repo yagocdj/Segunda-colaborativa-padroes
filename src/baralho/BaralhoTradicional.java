@@ -2,6 +2,7 @@ package baralho;
 
 import carta.CartaTradicional;
 import enums.Cor;
+import enums.Naipe;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,7 +19,7 @@ public class BaralhoTradicional extends Baralho<CartaTradicional> {
         String[] faces = { "As", "2", "3", "4", "5", "6",
                 "7", "8", "9", "10", "Valete", "Dama", "Rei" };
         // String naipe[] = { "Hearts", "Diamonds", "Clubs", "Spades" };
-        String[] naipe = { "\u2665", "\u2666", "\u2663", "\u2660" };
+        String[] naipe = { "♥", "♦", "♣", "♠" };
 
         deck = new ArrayList<CartaTradicional>(); // cria List de objetos Card
         randomNumbers = new Random(); // cria gerador de número aleatório
@@ -28,7 +29,7 @@ public class BaralhoTradicional extends Baralho<CartaTradicional> {
             deck.add(
                     new CartaTradicional(
                             faces[count % NUMBER_OF_CARDS_BY_SUIT],
-                            naipe[count / NUMBER_OF_CARDS_BY_SUIT],
+                            Naipe.values()[count / NUMBER_OF_CARDS_BY_SUIT],
                             naipe[count / NUMBER_OF_CARDS_BY_SUIT].equals("\u2665")
                                     || naipe[count / NUMBER_OF_CARDS_BY_SUIT].equals("\u2666")
                                             ? Cor.VERMELHO

@@ -13,7 +13,7 @@ public class CartaUnoBuilder implements CartaBuilder {
 
     @Override
     public void definirCor(Cor cor) {
-        resultado.setCor(cor);
+        //resultado.setCor(cor);
     }
 
     @Override
@@ -23,7 +23,7 @@ public class CartaUnoBuilder implements CartaBuilder {
 
     @Override
     public void definirValor(int valor) {
-        resultado.setValor(valor);
+        //resultado.setValor(valor);
     }
 
     @Override
