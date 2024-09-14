@@ -1,33 +1,37 @@
 package baralho;
 
-import builder.CartaBuilder;
-import builder.CartaDirector;
+import carta.Carta;
 
+import java.util.Collections;
 import java.util.Stack;
 
-public abstract class Baralho<T> {
-   protected Stack<T> cartas;
-   protected CartaDirector cartaDirector;
-   protected CartaBuilder cartaBuilder;
+public abstract class Baralho {
+    protected Stack<Carta> cartas;
 
-   public abstract void shuffle();
+    Baralho(){
+        cartas = new Stack<>();
+    }
 
-   public T dealCard(){
-      if (!cartas.isEmpty()){
-         return cartas.pop();
-      }
+    public void shuffle(){
+        Collections.shuffle(cartas);
+    }
 
-      return null;
-   }
+    public Carta dealCard() {
+        if (!cartas.isEmpty()) {
+            return cartas.pop();
+        }
 
-   public int size(){
-      return cartas.size();
-   }
+        return null;
+    }
 
-   public boolean hasCard() {
-      return !cartas.isEmpty();
-   }
+    public int size() {
+        return cartas.size();
+    }
 
-   @Override
-   public abstract String toString();
+    public boolean hasCard() {
+        return !cartas.isEmpty();
+    }
+
+    @Override
+    public abstract String toString();
 }

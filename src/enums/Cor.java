@@ -1,6 +1,5 @@
 package enums;
 
-
 public enum Cor {
     VERMELHO("\u001B[31m", "vermelho"),
     PRETO("\u001B[30m", "preto"),

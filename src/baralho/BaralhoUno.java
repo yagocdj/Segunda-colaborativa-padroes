@@ -1,22 +1,10 @@
 package baralho;
 
-import builder.CartaDirector;
-import builder.CartaUnoBuilder;
-import carta.CartaUno;
-
-public class BaralhoUno extends Baralho<CartaUno> {
+public class BaralhoUno extends Baralho {
 
     private static final int NUMBER_OF_CARDS = 113;
 
-    public BaralhoUno() {
-        cartaBuilder = new CartaUnoBuilder();
-        cartaDirector = new CartaDirector(cartaBuilder);
-        //cartaDirector.makeCarta(TipoCarta.UNO);
-    }
-
-    public void shuffle() {
-
-    }
+    public BaralhoUno() {}
 
     public String toString() {
         return "";
