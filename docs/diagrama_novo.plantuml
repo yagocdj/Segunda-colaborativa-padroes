@@ -1,0 +1,131 @@
+@startuml diagrama_com_factory
+
+class BaralhoTradicional {
+    - NUMBER_OF_CARDS : int
+    - NUMBER_OF_CARDS_BY_SUIT : int
+    - randomNumbers : Random
+    - deck : Stack<CartaTradicional>
+
+
+    + BaralhoTradicional()
+}
+
+class BaralhoUNO {
+    - deck : Stack<CartaUNO>
+   
+    + BaralhoUNO()
+}
+
+'--------------------- Carta ---------------------
+
+class CartaTradicional {
+    - face : String
+    - naipe : String
+    - cor : Cor
+    - valor : int
+
+    + CartaTradicional(face: String, naipe : String, valor : int)
+    + CartaTradicional(face : String, naipe : String, valor : int, cor : Cor)
+    + getFace() : String
+    + getValor() : int
+    + getCor() : Cor
+    + getNaipe() : String
+    + setValue(value : int) : void
+    + toString() : String
+}
+
+class CartaUNO {
+    - face : String
+    - cor: Cor
+    - valor : int
+
+    + CartaUNO(face: String, valor: int, cor : Cor)
+    + getFace() : String
+    + getValor() : int
+    + setValue(value : int) : void
+    + toString() : String
+}
+
+enum TipoCarta{
+    UNO
+    TRADICIONAL
+}
+
+enum Cor {
+	PRETO
+    VERMELHO
+	AMARELO
+    AZUL
+    VERDE
+	RESET
+	
+	- ansiCode : String;
+	- value : String;
+
+	+ Cor(ansiCode : String, cor : String)
+	+ ansiCode() : String
+	+ getValue() : String
+}
+
+'--------------------- Builder ---------------------
+
+interface BaralhoBuilder {
+    + {abstract} redefinir() : void
+    + {abstract} definirFaces() : void
+    + {abstract} criarDeckDeCartas() : void
+    + {abstract} criarRandomizador() : void
+    + {abstract} preencherBaralho() : void
+}
+
+class BaralhoTradicionalBuilder {
+    + redefinir() : void
+    + definirFaces() : void
+    + criarDeckDeCartas() : void
+    + criarRandomizador() : void
+    + preencherBaralho() : void
+    + obterResultado() : BaralhoTradicional
+}
+
+class BaralhoUNOBuilder {
+    + redefinir() : void
+    + definirFaces() : void
+    + criarDeckDeCartas() : void
+    + criarRandomizador() : void
+    + preencherBaralho() : void
+    + obterResultado() : BaralhoUNO
+}
+
+class BaralhoDirector {
+    - baralhoBuilder : BaralhoBuilder
+
+    + BaralhoDirector(baralhoBuilder : BaralhoBuilder)
+    + construirBaralho(TipoBaralho tipo) : void
+}
+
+'--------------------- Factory method ---------------------
+
+interface Carta {
+    + {abstract} definirFace() : void
+    + {abstract} definirCor() : void
+    + {abstract} definirValor() : void
+}
+
+
+'--------------------- Cliente ---------------------
+
+class MainBaralho {
+    {static} main(args : String[]) : void
+}
+
+'--------------------- Relacionamentos ---------------------
+
+BaralhoDirector --> BaralhoBuilder
+MainBaralho --> BaralhoDirector
+
+BaralhoTradicionalBuilder ..|> BaralhoBuilder
+BaralhoUNOBuilder ..|> BaralhoBuilder
+
+CartaUNO ..|> Carta
+CartaTradicional ..|> Carta
+
+@enduml
