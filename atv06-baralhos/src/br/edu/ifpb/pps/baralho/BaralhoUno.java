@@ -1,9 +1,8 @@
 package br.edu.ifpb.pps.baralho;
 
-import br.edu.ifpb.pps.carta.CartaUno;
-import br.edu.ifpb.pps.enums.TipoCarta;
 import br.edu.ifpb.pps.builder.CartaDirector;
 import br.edu.ifpb.pps.builder.CartaUnoBuilder;
+import br.edu.ifpb.pps.carta.CartaUno;
 
 public class BaralhoUno extends Baralho<CartaUno> {
 
@@ -12,7 +11,7 @@ public class BaralhoUno extends Baralho<CartaUno> {
     public BaralhoUno() {
         cartaBuilder = new CartaUnoBuilder();
         cartaDirector = new CartaDirector(cartaBuilder);
-        cartaDirector.makeCarta(TipoCarta.UNO);
+        //cartaDirector.makeCarta(TipoCarta.UNO);
     }
 
     public void shuffle() {

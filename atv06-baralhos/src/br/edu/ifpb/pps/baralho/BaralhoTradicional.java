@@ -1,11 +1,11 @@
 package br.edu.ifpb.pps.baralho;
 
+import br.edu.ifpb.pps.carta.CartaTradicional;
+import br.edu.ifpb.pps.enums.Cor;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-
-import br.edu.ifpb.pps.carta.CartaTradicional;
-import br.edu.ifpb.pps.enums.Cor;
 
 public class BaralhoTradicional extends Baralho<CartaTradicional> {
     private List<CartaTradicional> deck; // ArrayList usado como uma pilha de objetos
@@ -15,10 +15,10 @@ public class BaralhoTradicional extends Baralho<CartaTradicional> {
 
     // construtor preenche baralho de cartas
     public BaralhoTradicional() {
-        String faces[] = { "As", "2", "3", "4", "5", "6",
-                "7", "8", "9", "10", "Valete", "Dama", "Rei" };
+        String faces[] = {"As", "2", "3", "4", "5", "6",
+                "7", "8", "9", "10", "Valete", "Dama", "Rei"};
         // String naipe[] = { "Hearts", "Diamonds", "Clubs", "Spades" };
-        String naipe[] = { "\u2665", "\u2666", "\u2663", "\u2660" };
+        String naipe[] = {"\u2665", "\u2666", "\u2663", "\u2660"};
 
         deck = new ArrayList<CartaTradicional>(); // cria List de objetos Card
         randomNumbers = new Random(); // cria gerador de número aleatório
@@ -32,8 +32,8 @@ public class BaralhoTradicional extends Baralho<CartaTradicional> {
                             0,
                             naipe[count / NUMBER_OF_CARDS_BY_SUIT] == "\u2665"
                                     || naipe[count / NUMBER_OF_CARDS_BY_SUIT] == "\u2666"
-                                            ? Cor.VERMELHO
-                                            : Cor.PRETO));
+                                    ? Cor.VERMELHO
+                                    : Cor.PRETO));
         }
     } // fim do construtor DeckOfCards
 

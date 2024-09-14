@@ -18,7 +18,7 @@ public class CartaUnoBuilder implements CartaBuilder {
 
     @Override
     public void definirRepresentacaoEmString() {
-        
+
     }
 
     @Override
@@ -27,8 +27,8 @@ public class CartaUnoBuilder implements CartaBuilder {
     }
 
     @Override
-    public void definirFace() {
-        // resultado.
+    public void definirFace(String face) {
+
     }
 
     public CartaUno obterResultado() {

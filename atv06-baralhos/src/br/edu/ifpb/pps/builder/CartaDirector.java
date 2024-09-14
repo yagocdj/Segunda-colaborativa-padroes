@@ -18,6 +18,6 @@ public class CartaDirector {
 
         if (tipoCarta == TipoCarta.TRADICIONAL) {
             ((CartaTradicionalBuilder) cartaBuilder).definirNaipe();
-        } 
+        }
     }
 }

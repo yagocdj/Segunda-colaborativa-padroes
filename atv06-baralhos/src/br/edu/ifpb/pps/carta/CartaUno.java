@@ -8,7 +8,9 @@ public class CartaUno {
     private int valor;
 
     public CartaUno() {
-    };
+    }
+
+    ;
 
     public CartaUno(String face, int valor, Cor cor) {
         this.face = face;
@@ -27,8 +29,8 @@ public class CartaUno {
     public Cor getCor() {
         return cor;
     }
-    
-    public void setCor(Cor cor){
+
+    public void setCor(Cor cor) {
         this.cor = cor;
     }
 
