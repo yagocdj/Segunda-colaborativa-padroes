@@ -7,12 +7,9 @@ import enums.Naipe;
 
 public class CartaTradicionalFactory implements CartaFactory {
 
-    public Carta criarCarta(String face, int valor, Cor cor, Naipe naipe) {
-        return new CartaTradicional(face, naipe, cor);
+    @Override
+    public Carta criarCarta() {
+        return new CartaTradicional();
     }
 
-    @Override
-    public Carta criarCarta(String face, int valor, Cor cor) {
-        throw new UnsupportedOperationException("É necessário fornecer um naipe para cartas tradicionais.");
-    }
 }

@@ -11,6 +11,8 @@ public class CartaTradicional extends Carta {
         this.naipe = naipe;
     }
 
+    public CartaTradicional() { }
+
     public Naipe getNaipe() {
         return naipe;
     }
