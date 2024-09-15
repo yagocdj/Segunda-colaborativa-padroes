@@ -8,7 +8,7 @@ import java.util.Stack;
 public abstract class Baralho {
     protected Stack<Carta> cartas;
 
-    Baralho(){
+    Baralho() {
         cartas = new Stack<>();
     }
 
