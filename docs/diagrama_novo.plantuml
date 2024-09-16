@@ -2,47 +2,81 @@
 
 '--------------------- Classes Baralho ---------------------
 abstract class Baralho {
-    - deck: List<Carta>
+    # cartaFactory : CartaFactory
+    # numeroDeCartas : int
+    # faces : String[]
+    # cartas: Stack<Carta>
 
+    ~ Baralho()
+    ~ Baralho(numeroDeCartas : int, faces : String[], cartas : Stack<Carta>, cartaFactory : CartaFactory)
     + embaralhar() : void
-    + distribuir() : Carta
-    + adicionarCarta(carta: Carta) : void
+    + distribuirCarta() : Carta
     + obterTamanho() : int
+    + temCarta() : boolean
+    + adicionarCarta(carta: Carta) : void
+    + toString() : String
 }
 
-class BaralhoTradicional {
+' extends Baralho
+class BaralhoTradicional extends Baralho {
+    - NUMERO_DE_CARTAS_POR_NAIPE : int = 3 {readOnly}
+
     + BaralhoTradicional()
+    + BaralhoTradicional(numeroDeCartas : int, faces : String[], Stack<Carta> cartas)
+    + getNumeroDeCartasPorNaipe() : int
 }
 
-class BaralhoUNO {
+' extends Baralho
+class BaralhoUNO extends Baralho {
     + BaralhoUNO()
 }
 
 '--------------------- Classes Carta ---------------------
 
 abstract class Carta {
-    - face : String
-    - cor : Cor
-    - valor : int
+    # face : String
+    # cores : List<Cor>
+    # valor : int
 
-    + Carta(face: String, valor: int, cor : Cor)
+    + Carta(face: String, cores : List<Cor>, valor : int)
+    + Carta(face : String, cor : Cor, valor : int)
     + getFace() : String
-    + {abstract} getValor() : int
-    + {abstract} getCor() : Cor
-    + {abstract} toString() : String
+    + setFace() : String
+    + getCores() : List<Cor>
+    + setCores(cores : Cor...)
+    + getCor() : Cor
+    + getValor() : int
+    + setValor(valor : int) : void
+    + {abstract} setNaipe(Naipe naipe) : void
+    + {abstract} setAcoes(acoes : String...)
+    + {abstract} getNaipe() : Naipe
+    + {abstract} getAcoes() : String[]
 }
 
 class CartaTradicional extends Carta {
-    - naipe : String
+    - naipe : Naipe
 
-    + CartaTradicional(face: String, naipe : String, valor : int, cor : Cor)
+    + CartaTradicional(face: String, naipe : String, cor : Cor)
     + CartaTradicional()
+    + toString() : String
     + getNaipe() : String
+    + getAcoes() : String[]
+    + setAcoes(acoes : String...) : void
+    + setNaipe(naipe : Naipe)
 }
 
 class CartaUNO extends Carta {
-    + CartaUNO(face: String, valor: int, cor : Cor)
+    - String[] acoes
+
     + CartaUNO()
+    + CartaUNO(face: String, valor: int, cor : Cor)
+    + CartaUNO(face: String, valor: int, cores: List<Cor>)
+    + getCores() : List<Cor>
+    + getNaipe() : Naipe
+    + getAcoes() : String[]
+    + setNaipe(naipe : Naipe)
+    + setAcoes(acoes : String...) : void
+    + toString() : String
 }
 
 enum TipoBaralho {
@@ -69,32 +103,42 @@ enum Cor {
 '--------------------- Builder Pattern ---------------------
 
 interface BaralhoBuilder {
-    + redefinir() : void
-    + preencherBaralho() : void
+    ~ redefinir() : void
+    ~ definirFabricaDeCartas() : void
+    ~ definirFaces() : void
+    ~ definirQuantidadeDeCartas() : void
+    ~ preencherBaralho() : void
+    ~ obterResultado : Baralho
 }
 
+' implements BaralhoBuilder
 class BaralhoTradicionalBuilder {
-    - fabrica : CartaFactory
-    - resultado : BaralhoTradicional
+    - BaralhoTradicional : BaralhoTradicional
+    - cartaFactory : CartaFactory
+    - faces : String[]
+    - numeroDeCartas : int
+    - numeroDeCartasPorNaipe : int
 
-    + BaralhoTradicionalBuilder(fabrica: CartaFactory)
+    + BaralhoTradicionalBuilder()
     + redefinir() : void
-    - definirFaces() : void
-    - criarDeckDeCartas() : void
-    - criarRandomizador() : void
     + preencherBaralho() : void
+    + definirFaces() : void
+    + definirQuantidadeDeCartas() : void
+    + definirFabricaDeCartas() : void
     + obterResultado() : BaralhoTradicional
 }
 
+' implements BaralhoBuilder
 class BaralhoUNOBuilder {
-    - fabrica : CartaFactory
-    - resultado : BaralhoUNO
+    - baralhoUNO : BaralhoUNO
+    - cartaFactory : CartaFactory
+    - faces : String[]
 
-    - definirFaces() : void
-    - criarRandomizador() : void
-    - criarDeckDeCartas() : void
-    + BaralhoUNOBuilder(fabrica: CartaFactory)
+    + BaralhoUNOBuilder()
     + redefinir() : void
+    + definirFabricaDeCartas() : void
+    + definirFaces() : void
+    + definirQuantidadeDeCartas() : void
     + preencherBaralho() : void
     + obterResultado() : BaralhoUNO
 }
@@ -103,22 +147,22 @@ class BaralhoDirector {
     - baralhoBuilder : BaralhoBuilder
 
     + BaralhoDirector(baralhoBuilder : BaralhoBuilder)
-    + construirBaralho(tipo : TipoBaralho) : void
+    + construirBaralho() : void
 }
 
 '--------------------- Factory Method ---------------------
 
 interface CartaFactory {
-    + criarCarta() : Carta
+    ~ criarCarta() : Carta
 }
 
+' implements CartaFactory
 class CartaTradicionalFactory {
-'    + criarCarta(face : String, valor : int, cor : Cor) : CartaTradicional
     + criarCarta() : CartaTradicional
 }
 
+' implements CartaFactory
 class CartaUNOFactory {
-'    + criarCarta(face : String, valor : int, cor : Cor) : CartaUNO
     + criarCarta() : CartaUNO
 }
 
@@ -133,6 +177,7 @@ class MainBaralho {
 
 MainBaralho --> BaralhoDirector
 BaralhoDirector --> BaralhoBuilder
+BaralhoBuilder --> Baralho
 
 BaralhoTradicional ..|> Baralho
 BaralhoUNO ..|> Baralho
@@ -144,9 +189,13 @@ CartaTradicionalFactory ..|> CartaFactory
 CartaUNOFactory ..|> CartaFactory
 
 CartaFactory --> Carta
+CartaFactory --* Baralho
+Carta --* Baralho : possui
+Carta *-- Cor : possui
 
 BaralhoTradicionalBuilder --> BaralhoTradicional
 BaralhoUNOBuilder --> BaralhoUNO
+
 
 
 @enduml

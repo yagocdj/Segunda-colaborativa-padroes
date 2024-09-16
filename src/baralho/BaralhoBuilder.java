@@ -6,7 +6,7 @@ public interface BaralhoBuilder {
 
     void definirFabricaDeCartas();
 
-    void definirFaces(String... faces);
+    void definirFaces();
 
     void definirQuantidadeDeCartas();
 

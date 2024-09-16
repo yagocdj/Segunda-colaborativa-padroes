@@ -1,6 +1,4 @@
-package factory;
-
-import carta.Carta;
+package carta;
 
 public interface CartaFactory {
 

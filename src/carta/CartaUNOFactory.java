@@ -1,7 +1,5 @@
-package factory;
+package carta;
 
-import carta.Carta;
-import carta.CartaUNO;
 import enums.Cor;
 import enums.Naipe;
 

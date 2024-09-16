@@ -2,7 +2,6 @@ import baralho.Baralho;
 import baralho.BaralhoBuilder;
 import baralho.BaralhoDirector;
 import baralho.BaralhoTradicionalBuilder;
-import enums.TipoBaralho;
 
 public class Main {
     public static void main(String[] args)

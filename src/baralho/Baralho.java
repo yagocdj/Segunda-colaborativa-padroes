@@ -1,7 +1,7 @@
 package baralho;
 
 import carta.Carta;
-import factory.CartaFactory;
+import carta.CartaFactory;
 
 import java.util.Collections;
 import java.util.Stack;
@@ -27,11 +27,11 @@ public abstract class Baralho {
         }
     }
 
-    public void shuffle() {
+    public void embaralhar() {
         Collections.shuffle(cartas);
     }
 
-    public Carta dealCard() {
+    public Carta distribuirCarta() {
         if (!cartas.isEmpty()) {
             return cartas.pop();
         }
@@ -39,18 +39,19 @@ public abstract class Baralho {
         return null;
     }
 
-    public int size() {
+    public int obterTamanho() {
         return cartas.size();
     }
 
-    public boolean hasCard() {
+    public boolean temCarta() {
         return !cartas.isEmpty();
     }
 
-    public void addCard(Carta carta) {
+    public void adicionarCarta(Carta carta) {
         this.cartas.add(carta);
     }
 
+    @Override
     public String toString() {
         StringBuilder s = new StringBuilder();
         int column = 0;

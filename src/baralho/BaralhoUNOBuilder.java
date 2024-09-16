@@ -1,8 +1,8 @@
 package baralho;
 
 import carta.Carta;
-import factory.CartaFactory;
-import factory.CartaUNOFactory;
+import carta.CartaFactory;
+import carta.CartaUNOFactory;
 
 public class BaralhoUNOBuilder implements BaralhoBuilder {
 
@@ -24,7 +24,7 @@ public class BaralhoUNOBuilder implements BaralhoBuilder {
     }
 
     @Override
-    public void definirFaces(String... faces) {
+    public void definirFaces() {
         this.faces = new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9",
                 "+2", "inverter", "pular", "+4",
                 "trocaMaos", "curinga" };

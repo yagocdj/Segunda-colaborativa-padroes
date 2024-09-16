@@ -1,10 +1,10 @@
 package baralho;
 
 import carta.Carta;
+import carta.CartaFactory;
+import carta.CartaTradicionalFactory;
 import enums.Cor;
 import enums.Naipe;
-import factory.CartaFactory;
-import factory.CartaTradicionalFactory;
 
 public class BaralhoTradicionalBuilder implements BaralhoBuilder {
 
@@ -42,12 +42,12 @@ public class BaralhoTradicionalBuilder implements BaralhoBuilder {
                             || Naipe.values()[contagem / numeroDeCartasPorNaipe]
                                     .getSymbol().equals("♦") ? Cor.VERMELHO : Cor.PRETO);
 
-            baralhoTradicional.addCard(cartaTradicional);
+            baralhoTradicional.adicionarCarta(cartaTradicional);
         }
     }
 
     @Override
-    public void definirFaces(String... faces) {
+    public void definirFaces() {
         this.faces = new String[] { "As", "2", "3", "4", "5", "6",
                 "7", "8", "9", "10", "Valete", "Dama", "Rei" };
     }

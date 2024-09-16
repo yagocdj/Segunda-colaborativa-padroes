@@ -3,7 +3,7 @@ package baralho;
 import java.util.Stack;
 
 import carta.Carta;
-import factory.CartaTradicionalFactory;
+import carta.CartaTradicionalFactory;
 
 public class BaralhoTradicional extends Baralho {
 
