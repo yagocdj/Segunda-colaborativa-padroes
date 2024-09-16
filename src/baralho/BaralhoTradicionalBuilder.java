@@ -4,6 +4,7 @@ import carta.Carta;
 import enums.Cor;
 import enums.Naipe;
 import factory.CartaFactory;
+import factory.CartaTradicionalFactory;
 
 public class BaralhoTradicionalBuilder implements BaralhoBuilder {
 
@@ -11,10 +12,11 @@ public class BaralhoTradicionalBuilder implements BaralhoBuilder {
     private CartaFactory cartaFactory;
     private String[] faces;
     private int numeroDeCartas;
-    private final int NUMERO_DE_CARTAS_POR_NAIPE = 13;
+    private int numeroDeCartasPorNaipe;
 
     public BaralhoTradicionalBuilder() {
         this.baralhoTradicional = new BaralhoTradicional();
+        this.numeroDeCartasPorNaipe = baralhoTradicional.getNumeroDeCartasPorNaipe();
     }
 
     @Override
@@ -28,12 +30,16 @@ public class BaralhoTradicionalBuilder implements BaralhoBuilder {
         for (int contagem = 0; contagem < numeroDeCartas; contagem++) {
             Carta cartaTradicional = cartaFactory.criarCarta();
 
-            cartaTradicional.setFace(this.faces[contagem % NUMERO_DE_CARTAS_POR_NAIPE]);
-            cartaTradicional.setNaipe(Naipe.values()[contagem / NUMERO_DE_CARTAS_POR_NAIPE]);
+            cartaTradicional.setFace(this.faces[contagem % numeroDeCartasPorNaipe]);
+            cartaTradicional.setNaipe(Naipe.values()[contagem / numeroDeCartasPorNaipe]);
+            
+            // Todas as cartas tradicionais possuem valor 0
+            cartaTradicional.setValor(0);
+            
             cartaTradicional.setCores(
-                    Naipe.values()[contagem / NUMERO_DE_CARTAS_POR_NAIPE]
+                    Naipe.values()[contagem / numeroDeCartasPorNaipe]
                             .getSymbol().equals("♥")
-                            || Naipe.values()[contagem / NUMERO_DE_CARTAS_POR_NAIPE]
+                            || Naipe.values()[contagem / numeroDeCartasPorNaipe]
                                     .getSymbol().equals("♦") ? Cor.VERMELHO : Cor.PRETO);
 
             baralhoTradicional.addCard(cartaTradicional);
@@ -42,12 +48,13 @@ public class BaralhoTradicionalBuilder implements BaralhoBuilder {
 
     @Override
     public void definirFaces(String... faces) {
-        this.faces = faces;
+        this.faces = new String[] { "As", "2", "3", "4", "5", "6",
+                "7", "8", "9", "10", "Valete", "Dama", "Rei" };
     }
 
     @Override
-    public void definirQuantidadeCartas(int quantidade) {
-        this.numeroDeCartas = quantidade;
+    public void definirQuantidadeDeCartas() {
+        this.numeroDeCartas = 52;
     }
 
     @Override
@@ -56,7 +63,7 @@ public class BaralhoTradicionalBuilder implements BaralhoBuilder {
     }
 
     @Override
-    public void definirFabricaDeCartas(CartaFactory cartaFactory) {
-        this.cartaFactory = cartaFactory;
+    public void definirFabricaDeCartas() {
+        this.cartaFactory = new CartaTradicionalFactory();
     }
 }

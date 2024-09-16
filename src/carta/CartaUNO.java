@@ -5,19 +5,18 @@ import java.util.List;
 import enums.Cor;
 import enums.Naipe;
 
-public class CartaUno extends Carta {
+public class CartaUNO extends Carta {
 
-    private List<Cor> cores;
+    private String[] acoes;
 
-    public CartaUno() {
+    public CartaUNO() {
     }
 
-    public CartaUno(String face, int valor, Cor cor) {
+    public CartaUNO(String face, int valor, Cor cor) {
         super(face, cor, valor);
-        this.cores = List.of(cor);
     }
 
-    public CartaUno(String face, int valor, List<Cor> cores) {
+    public CartaUNO(String face, int valor, List<Cor> cores) {
         super(face, cores, valor);
     }
 
@@ -25,14 +24,26 @@ public class CartaUno extends Carta {
         return cores;
     }
 
+    @Override
     public Naipe getNaipe() {
         throw new UnsupportedOperationException(
                 "Operação não suportada para esse tipo de baralho.");
     }
 
+    @Override
+    public String[] getAcoes() {
+        return this.acoes;
+    }
+
+    @Override
     public void setNaipe(Naipe naipe) {
         throw new UnsupportedOperationException(
                 "Operação não suportada para esse tipo de baralho.");
+    }
+
+    @Override
+    public void setAcoes(String... acoes) {
+        this.acoes = acoes;
     }
 
     @Override

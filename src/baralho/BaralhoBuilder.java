@@ -1,16 +1,14 @@
 package baralho;
 
-import factory.CartaFactory;
-
 public interface BaralhoBuilder {
 
     void redefinir();
 
-    void definirFabricaDeCartas(CartaFactory cartaFactory);
+    void definirFabricaDeCartas();
 
     void definirFaces(String... faces);
 
-    void definirQuantidadeCartas(int quantidade);
+    void definirQuantidadeDeCartas();
 
     void preencherBaralho();
 

@@ -6,9 +6,9 @@ import enums.Naipe;
 import java.util.List;
 
 public abstract class Carta {
-    private String face;
-    private List<Cor> cores; // Múltiplas cores
-    private int valor;
+    protected String face;
+    protected List<Cor> cores; // Múltiplas cores
+    protected int valor;
 
     public Carta() {}
 
@@ -57,5 +57,10 @@ public abstract class Carta {
 
     public abstract void setNaipe(Naipe naipe);
 
+    public abstract void setAcoes(String... acoes);
+
     public abstract Naipe getNaipe();
+
+    public abstract String[] getAcoes();
+
 }

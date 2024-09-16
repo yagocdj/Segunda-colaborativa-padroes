@@ -19,10 +19,26 @@ public class CartaTradicional extends Carta {
             naipe.getSymbol() + Cor.RESET.ansiCode() + ", valor " + super.getValor();
     }
 
+    @Override
     public Naipe getNaipe() {
         return naipe;
     }
 
+    @Override
+    public String[] getAcoes() {
+        throw new UnsupportedOperationException(
+            "Operação não suportada para esse tipo de baralho."
+        );
+    }
+
+    @Override
+    public void setAcoes(String... acoes) {
+        throw new UnsupportedOperationException(
+            "Operação não suportada para esse tipo de baralho."
+        );
+    }
+
+    @Override
     public void setNaipe(Naipe naipe) {
         this.naipe = naipe;
     }

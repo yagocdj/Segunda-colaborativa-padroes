@@ -1,23 +1,24 @@
 package baralho;
 
+import java.util.Stack;
+
 import carta.Carta;
+import factory.CartaTradicionalFactory;
 
 public class BaralhoTradicional extends Baralho {
+
+    private final int NUMERO_DE_CARTAS_POR_NAIPE = 13;
 
     public BaralhoTradicional() {
     }
 
-    public String toString() {
-        StringBuilder s = new StringBuilder();
-        int column = 0;
-        for (Carta card : cartas) {
-            column++;
-            s.append(card.toString()).append("   ");
-            if (column % 4 == 0) {
-                s.append("\n");
-                column = 0;
-            }
-        }
-        return s.toString();
+    public BaralhoTradicional(int numeroDeCartas, String[] faces,
+            Stack<Carta> cartas) {
+        super(numeroDeCartas, faces, cartas, new CartaTradicionalFactory());
     }
+
+    public int getNumeroDeCartasPorNaipe() {
+        return this.NUMERO_DE_CARTAS_POR_NAIPE;
+    }
+
 }
