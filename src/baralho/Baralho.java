@@ -1,14 +1,15 @@
 package baralho;
 
 import carta.Carta;
-import carta.CartaFactory;
+import carta.CartaCreator;
 
 import java.util.Collections;
 import java.util.Stack;
 
 public abstract class Baralho {
     
-    protected CartaFactory cartaFactory;
+    public static final int NUMERO_DE_CARTAS = 0;
+    protected CartaCreator cartaFactory;
     protected int numeroDeCartas;
     protected String[] faces;
     protected Stack<Carta> cartas;
@@ -17,7 +18,7 @@ public abstract class Baralho {
         cartas = new Stack<>();
     }
 
-    Baralho(int numeroDeCartas, String[] faces, Stack<Carta> cartas, CartaFactory cartaFactory) {
+    Baralho(int numeroDeCartas, String[] faces, Stack<Carta> cartas, CartaCreator cartaFactory) {
         this.numeroDeCartas = numeroDeCartas;
         this.faces = faces;
         this.cartas = cartas;

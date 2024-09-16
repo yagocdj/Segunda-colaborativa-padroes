@@ -1,5 +1,6 @@
 package baralho;
 
+import enums.TipoBaralho;
 
 public class BaralhoDirector {
 
@@ -9,11 +10,17 @@ public class BaralhoDirector {
         this.baralhoBuilder = baralhoBuilder;
     }
 
-    public void construirBaralho() {
+    public void mudarDiretor(BaralhoBuilder baralhoBuilder) {
+        this.baralhoBuilder = baralhoBuilder;
+    }
+
+    public void construirBaralho(TipoBaralho tipo) {
         baralhoBuilder.definirFabricaDeCartas();
-        baralhoBuilder.definirFaces();
-        baralhoBuilder.definirQuantidadeDeCartas();
-        baralhoBuilder.preencherBaralho();
+        baralhoBuilder.montarCartas();
+
+        if (tipo == TipoBaralho.UNO) {
+            baralhoBuilder.montarCartasEspeciais();
+        }
     }
 
 }

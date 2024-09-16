@@ -1,12 +1,12 @@
 package carta;
 
-import enums.Cor;
+import enums.CorCartaTradicional;
 import enums.Naipe;
 
 public class CartaTradicional extends Carta {
     private Naipe naipe; // naipe da carta ("Hearts", "Diamonds", ...)
 
-    public CartaTradicional(String face, Naipe naipe, Cor cor) {
+    public CartaTradicional(String face, Naipe naipe, CorCartaTradicional cor) {
         super(face, cor, 0);
         this.naipe = naipe;
     }
@@ -16,7 +16,7 @@ public class CartaTradicional extends Carta {
     @Override
     public String toString() {
         return String.format("%6s", super.getFace()) + " de " + super.getCor().ansiCode() +
-            naipe.getSymbol() + Cor.RESET.ansiCode() + ", valor " + super.getValor();
+            naipe.getSymbol() + super.getCor().reset() + ", valor " + super.getValor();
     }
 
     @Override

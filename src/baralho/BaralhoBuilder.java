@@ -6,11 +6,11 @@ public interface BaralhoBuilder {
 
     void definirFabricaDeCartas();
 
-    void definirFaces();
+    void montarCartas();
 
-    void definirQuantidadeDeCartas();
-
-    void preencherBaralho();
+    void montarCartasEspeciais();
 
     Baralho obterResultado();
+
+    void definirNaipe();
 }

@@ -1,22 +1,19 @@
 package baralho;
 
 import carta.Carta;
-import carta.CartaFactory;
+import carta.CartaCreator;
 import carta.CartaTradicionalFactory;
-import enums.Cor;
+import enums.CorCartaTradicional;
+import enums.FaceCartaTradicional;
 import enums.Naipe;
 
 public class BaralhoTradicionalBuilder implements BaralhoBuilder {
 
     private BaralhoTradicional baralhoTradicional;
-    private CartaFactory cartaFactory;
-    private String[] faces;
-    private int numeroDeCartas;
-    private int numeroDeCartasPorNaipe;
+    private CartaCreator cartaFactory;
 
     public BaralhoTradicionalBuilder() {
         this.baralhoTradicional = new BaralhoTradicional();
-        this.numeroDeCartasPorNaipe = baralhoTradicional.getNumeroDeCartasPorNaipe();
     }
 
     @Override
@@ -25,36 +22,28 @@ public class BaralhoTradicionalBuilder implements BaralhoBuilder {
     }
 
     @Override
-    public void preencherBaralho() {
+    public void montarCartas() {
 
-        for (int contagem = 0; contagem < numeroDeCartas; contagem++) {
+        for (int contagem = 0; contagem < BaralhoTradicional.NUMERO_DE_CARTAS; contagem++) {
             Carta cartaTradicional = cartaFactory.criarCarta();
 
-            cartaTradicional.setFace(this.faces[contagem % numeroDeCartasPorNaipe]);
-            cartaTradicional.setNaipe(Naipe.values()[contagem / numeroDeCartasPorNaipe]);
-            
-            // Todas as cartas tradicionais possuem valor 0
-            cartaTradicional.setValor(0);
-            
-            cartaTradicional.setCores(
-                    Naipe.values()[contagem / numeroDeCartasPorNaipe]
-                            .getSymbol().equals("♥")
-                            || Naipe.values()[contagem / numeroDeCartasPorNaipe]
-                                    .getSymbol().equals("♦") ? Cor.VERMELHO : Cor.PRETO);
+            int indiceNaipe = contagem / BaralhoTradicional.NUMERO_DE_CARTAS_POR_NAIPE;
+            int indiceFace = contagem % BaralhoTradicional.NUMERO_DE_CARTAS_POR_NAIPE;
+
+            Naipe naipe = Naipe.values()[indiceNaipe];
+            String simboloNaipe = naipe.getSymbol();
+            FaceCartaTradicional face = FaceCartaTradicional.values()[indiceFace];
+
+            cartaTradicional.setFace(face.getNome());
+            cartaTradicional.setNaipe(naipe);
+            cartaTradicional.setValor(face.getValor());
+
+            cartaTradicional.setCores(simboloNaipe.equals("♥") || simboloNaipe.equals("♦")
+                    ? CorCartaTradicional.VERMELHO
+                    : CorCartaTradicional.PRETO);
 
             baralhoTradicional.adicionarCarta(cartaTradicional);
         }
-    }
-
-    @Override
-    public void definirFaces() {
-        this.faces = new String[] { "As", "2", "3", "4", "5", "6",
-                "7", "8", "9", "10", "Valete", "Dama", "Rei" };
-    }
-
-    @Override
-    public void definirQuantidadeDeCartas() {
-        this.numeroDeCartas = 52;
     }
 
     @Override
@@ -66,4 +55,14 @@ public class BaralhoTradicionalBuilder implements BaralhoBuilder {
     public void definirFabricaDeCartas() {
         this.cartaFactory = new CartaTradicionalFactory();
     }
+
+    @Override
+    public void definirNaipe() {
+    }
+
+    @Override
+    public void montarCartasEspeciais() {
+        throw new UnsupportedOperationException("Unimplemented method 'definirCartasEspeciais'");
+    }
+
 }

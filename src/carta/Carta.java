@@ -5,7 +5,7 @@ import enums.Naipe;
 
 import java.util.List;
 
-public abstract class Carta {
+public abstract class Carta implements Cloneable {
     protected String face;
     protected List<Cor> cores; // Múltiplas cores
     protected int valor;
@@ -63,4 +63,13 @@ public abstract class Carta {
 
     public abstract String[] getAcoes();
 
+
+    @Override
+    public Carta clone() {
+        try {
+            return (Carta) super.clone();
+        } catch (CloneNotSupportedException e) {
+            throw new AssertionError();
+        }
+    }
 }

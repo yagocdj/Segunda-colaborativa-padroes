@@ -1,9 +1,6 @@
 package carta;
 
-import enums.Cor;
-import enums.Naipe;
-
-public class CartaTradicionalFactory implements CartaFactory {
+public class CartaTradicionalFactory extends CartaCreator {
 
     @Override
     public Carta criarCarta() {

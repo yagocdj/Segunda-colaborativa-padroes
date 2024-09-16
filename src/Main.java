@@ -2,17 +2,27 @@ import baralho.Baralho;
 import baralho.BaralhoBuilder;
 import baralho.BaralhoDirector;
 import baralho.BaralhoTradicionalBuilder;
+import baralho.BaralhoUNOBuilder;
+import enums.TipoBaralho;
 
 public class Main {
     public static void main(String[] args)
     {
-        BaralhoBuilder baralhoBuilder = new BaralhoTradicionalBuilder();
-        BaralhoDirector baralhoDirector = new BaralhoDirector(baralhoBuilder);
-        baralhoDirector.construirBaralho();
-        // baralhoDirector.construirBaralho();
-        Baralho baralhoTradicional = baralhoBuilder.obterResultado();
+        BaralhoBuilder baralhoTradicionalBuilder = new BaralhoTradicionalBuilder();
+        BaralhoDirector baralhoDirector = new BaralhoDirector(baralhoTradicionalBuilder);
+        baralhoDirector.construirBaralho(TipoBaralho.TRADICIONAL);
+
+        Baralho baralhoTradicional = baralhoTradicionalBuilder.obterResultado();
+
+        BaralhoBuilder baralhoUNOBuilder = new BaralhoUNOBuilder();
+        baralhoDirector.mudarDiretor(baralhoUNOBuilder);
+        baralhoDirector.construirBaralho(TipoBaralho.UNO);
         
-        System.out.println(baralhoTradicional);
+        Baralho baralhoUNO = baralhoUNOBuilder.obterResultado();
+        
+    
+        // System.out.println(baralhoTradicional);
+        System.out.println(baralhoUNO);
 
 //        // imprime todas as 52 cartas na ordem em que elas são distribuídas
 //        System.out.println( "Size: " + baralho.size());

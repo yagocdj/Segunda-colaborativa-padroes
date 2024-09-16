@@ -3,6 +3,7 @@ package carta;
 import java.util.List;
 
 import enums.Cor;
+import enums.CorCartaUNO;
 import enums.Naipe;
 
 public class CartaUNO extends Carta {
@@ -51,16 +52,24 @@ public class CartaUNO extends Carta {
         if (cores.size() == 1) {
             return String.format("%6s", super.getFace()) +
                     " de cor " + cores.get(0).ansiCode()
-                    + cores.get(0) + Cor.RESET.ansiCode()
+                    + cores.get(0) + cores.get(0).reset()
                     + ", valor " + super.getValor();
-        } else {
-            StringBuilder coresString = new StringBuilder();
-            for (Cor cor : cores) {
-                coresString.append(
-                        cor.ansiCode()).append(cor).append(Cor.RESET.ansiCode()).append(" ");
-            }
-            return String.format("%6s", super.getFace()) +
-                    " com cores " + coresString.toString() + ", valor " + super.getValor();
         }
+
+        StringBuilder coresString = new StringBuilder();
+        
+        for (Cor cor : cores) {
+            coresString.append(
+                    cor.ansiCode())
+                    .append(cor)
+                    .append(cor.reset())
+                    .append(" ");
+        
+        }
+        return String.format("%6s", super.getFace()) +
+            " com cores " 
+            + coresString.toString() 
+            + ", valor " 
+            + super.getValor();
     }
 }
