@@ -13,12 +13,18 @@ public class CartaTradicional extends Carta {
 
     public CartaTradicional() { }
 
+    @Override
+    public String toString() {
+        return String.format("%6s", super.getFace()) + " de " + super.getCor().ansiCode() +
+            naipe.getSymbol() + Cor.RESET.ansiCode() + ", valor " + super.getValor();
+    }
+
     public Naipe getNaipe() {
         return naipe;
     }
 
-    public String toString() {
-        return String.format("%6s", super.getFace()) + " de " + super.getCor().ansiCode() + naipe.getSymbol() + Cor.RESET.ansiCode() + ", valor " + super.getValor();
+    public void setNaipe(Naipe naipe) {
+        this.naipe = naipe;
     }
 
 }

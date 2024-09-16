@@ -1,29 +1,43 @@
 package baralho;
 
+import carta.Carta;
+import enums.Cor;
+import enums.Naipe;
 import factory.CartaFactory;
 
 public class BaralhoTradicionalBuilder implements BaralhoBuilder {
-    private BaralhoTradicional resultado;
+
+    private BaralhoTradicional baralhoTradicional;
     private CartaFactory cartaFactory;
     private String[] faces;
     private int numeroDeCartas;
-    private int numeroDeCartasPorNaipe;
+    private final int NUMERO_DE_CARTAS_POR_NAIPE = 13;
 
-    public BaralhoTradicionalBuilder() { }
+    public BaralhoTradicionalBuilder() {
+        this.baralhoTradicional = new BaralhoTradicional();
+    }
 
     @Override
     public void redefinir() {
-        this.resultado = new BaralhoTradicional();
+        this.baralhoTradicional = new BaralhoTradicional();
     }
 
     @Override
     public void preencherBaralho() {
-        
-    }
 
-    @Override
-    public BaralhoTradicional obterResultado() {
-        return this.resultado;
+        for (int contagem = 0; contagem < numeroDeCartas; contagem++) {
+            Carta cartaTradicional = cartaFactory.criarCarta();
+
+            cartaTradicional.setFace(this.faces[contagem % NUMERO_DE_CARTAS_POR_NAIPE]);
+            cartaTradicional.setNaipe(Naipe.values()[contagem / NUMERO_DE_CARTAS_POR_NAIPE]);
+            cartaTradicional.setCores(
+                    Naipe.values()[contagem / NUMERO_DE_CARTAS_POR_NAIPE]
+                            .getSymbol().equals("♥")
+                            || Naipe.values()[contagem / NUMERO_DE_CARTAS_POR_NAIPE]
+                                    .getSymbol().equals("♦") ? Cor.VERMELHO : Cor.PRETO);
+
+            baralhoTradicional.addCard(cartaTradicional);
+        }
     }
 
     @Override
@@ -34,5 +48,15 @@ public class BaralhoTradicionalBuilder implements BaralhoBuilder {
     @Override
     public void definirQuantidadeCartas(int quantidade) {
         this.numeroDeCartas = quantidade;
+    }
+
+    @Override
+    public BaralhoTradicional obterResultado() {
+        return this.baralhoTradicional;
+    }
+
+    @Override
+    public void definirFabricaDeCartas(CartaFactory cartaFactory) {
+        this.cartaFactory = cartaFactory;
     }
 }

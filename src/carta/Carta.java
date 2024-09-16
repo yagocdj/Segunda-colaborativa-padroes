@@ -1,6 +1,8 @@
 package carta;
 
 import enums.Cor;
+import enums.Naipe;
+
 import java.util.List;
 
 public abstract class Carta {
@@ -28,12 +30,16 @@ public abstract class Carta {
         return face;
     }
 
+    public void setFace(String face) {
+        this.face = face;
+    }
+
     public List<Cor> getCores() {
         return cores;
     }
 
-    public int getValor() {
-        return valor;
+    public void setCores(Cor... cores) {
+        this.cores = List.of(cores);
     }
 
     // Método para obter a primeira cor (caso seja uma lista com uma única cor)
@@ -41,6 +47,15 @@ public abstract class Carta {
         return cores.get(0);
     }
 
-    @Override
-    public abstract String toString();
+    public int getValor() {
+        return valor;
+    }
+
+    public void setValor(int valor) {
+        this.valor = valor;
+    }
+
+    public abstract void setNaipe(Naipe naipe);
+
+    public abstract Naipe getNaipe();
 }

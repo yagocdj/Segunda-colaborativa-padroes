@@ -32,6 +32,10 @@ public abstract class Baralho {
         return !cartas.isEmpty();
     }
 
+    public void addCard(Carta carta) {
+        this.cartas.add(carta);
+    }
+
     @Override
     public abstract String toString();
 }
