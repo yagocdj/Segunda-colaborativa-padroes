@@ -1,8 +1,6 @@
 package enums;
 
-import carta.FaceUNO;
-
-public enum FaceNumericaUNO implements FaceUNO{
+public enum FaceNumericaUNO{
     FACE_0("0", 0),
     FACE_1("1", 1),
     FACE_2("2", 2),

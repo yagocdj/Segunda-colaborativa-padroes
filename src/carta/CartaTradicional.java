@@ -1,12 +1,12 @@
 package carta;
 
-import enums.CorCartaTradicional;
+import enums.Cor;
 import enums.Naipe;
 
 public class CartaTradicional extends Carta {
     private Naipe naipe; // naipe da carta ("Hearts", "Diamonds", ...)
 
-    public CartaTradicional(String face, Naipe naipe, CorCartaTradicional cor) {
+    public CartaTradicional(String face, Naipe naipe, Cor cor) {
         super(face, cor, 0);
         this.naipe = naipe;
     }

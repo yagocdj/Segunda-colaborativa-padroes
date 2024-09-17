@@ -7,7 +7,6 @@ import java.util.Stack;
 
 public abstract class Baralho {
     
-    public static final int NUMERO_DE_CARTAS = 0;
     protected int numeroDeCartas;
     protected String[] faces;
     protected Stack<Carta> cartas;

@@ -1,8 +1,7 @@
 package enums;
 
-import carta.FaceUNO;
 
-public enum FaceEspecialUNO implements FaceUNO {
+public enum FaceEspecialUNO {
     INVERTER("Inverter", 20),
     PULAR("Pular", 20),
     MAIS_DOIS("+2", 20),
