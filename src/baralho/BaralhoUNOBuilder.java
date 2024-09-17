@@ -46,6 +46,12 @@ public class BaralhoUNOBuilder implements BaralhoBuilder {
 
     @Override
     public void montarCartasEspeciais() {
+        montarCartasEspeciaisDeUmaCor();
+        montarCartasEspeciasMulticor();
+        criarCartaTrocaMao();
+    }
+
+    private void montarCartasEspeciaisDeUmaCor() {
         for (var cor : CorCartaUNO.values()) {
             for (int i = 0; i < BaralhoUNO.NUMERO_DE_CARTAS_ESPECIAIS_POR_COR; i++) {
                 Carta cartaUNO = cartaFactory.criarCarta();
@@ -60,7 +66,9 @@ public class BaralhoUNOBuilder implements BaralhoBuilder {
                 baralhoUNO.adicionarCarta(cartaUNO.clone());
             }
         }
+    }
 
+    private void montarCartasEspeciasMulticor() {
         final int indiceInicialDasFacesMulticor = 3;
         final int indiceFinalDasFacesMulticor = 5;
 
@@ -78,7 +86,9 @@ public class BaralhoUNOBuilder implements BaralhoBuilder {
                 baralhoUNO.adicionarCarta(cartaUNO);
             }
         }
+    }
 
+    private void criarCartaTrocaMao() {
         Carta cartaUNO = cartaFactory.criarCarta();
         
         FaceEspecialUNO face = FaceEspecialUNO.TROCAR_MAO;
@@ -89,23 +99,6 @@ public class BaralhoUNOBuilder implements BaralhoBuilder {
 
         baralhoUNO.adicionarCarta(cartaUNO);
     }
-
-    // private void montarCartasEspeciaisDeUmaCor() {
-    //     for (var cor : CorCartaUNO.values()) {
-    //         for (int i = 0; i < BaralhoUNO.NUMERO_DE_CARTAS_ESPECIAIS_POR_COR; i++) {
-    //             Carta cartaUNO = cartaFactory.criarCarta();
-
-    //             FaceEspecialUNO face = FaceEspecialUNO.values()[i];
-
-    //             cartaUNO.setFace(face.getNome());
-    //             cartaUNO.setValor(face.getValor());
-    //             cartaUNO.setCores(cor);
-
-    //             baralhoUNO.adicionarCarta(cartaUNO);
-    //             baralhoUNO.adicionarCarta(cartaUNO.clone());
-    //         }
-    //     }
-    // }
 
     @Override
     public Baralho obterResultado() {
