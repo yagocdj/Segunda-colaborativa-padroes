@@ -1,16 +1,15 @@
 package baralho;
 
 import carta.Carta;
-import carta.CartaCreator;
-import carta.CartaUNOFactory;
+import carta.CartaFactory;
 import enums.CorCartaUNO;
 import enums.FaceEspecialUNO;
 import enums.FaceNumericaUNO;
+import enums.TipoBaralho;
 
 public class BaralhoUNOBuilder implements BaralhoBuilder {
 
     private BaralhoUNO baralhoUNO;
-    private CartaCreator cartaFactory;
 
     public BaralhoUNOBuilder() {
         this.baralhoUNO = new BaralhoUNO();
@@ -22,15 +21,10 @@ public class BaralhoUNOBuilder implements BaralhoBuilder {
     }
 
     @Override
-    public void definirFabricaDeCartas() {
-        this.cartaFactory = new CartaUNOFactory();
-    }
-
-    @Override
     public void montarCartas() {
         for (var cor : CorCartaUNO.values()) {
             for (int i = 0; i < BaralhoUNO.NUMERO_DE_CARTAS_NUMERICAS_POR_COR; i++) {
-                Carta cartaUNO = cartaFactory.criarCarta();
+                Carta cartaUNO = CartaFactory.criarCarta(TipoBaralho.UNO);
 
                 FaceNumericaUNO face = FaceNumericaUNO.values()[i];
 
@@ -54,7 +48,7 @@ public class BaralhoUNOBuilder implements BaralhoBuilder {
     private void montarCartasEspeciaisDeUmaCor() {
         for (var cor : CorCartaUNO.values()) {
             for (int i = 0; i < BaralhoUNO.NUMERO_DE_CARTAS_ESPECIAIS_POR_COR; i++) {
-                Carta cartaUNO = cartaFactory.criarCarta();
+                Carta cartaUNO = CartaFactory.criarCarta(TipoBaralho.UNO);
 
                 FaceEspecialUNO face = FaceEspecialUNO.values()[i];
 
@@ -75,7 +69,7 @@ public class BaralhoUNOBuilder implements BaralhoBuilder {
         // o número de cartas especiais é 8, então o loop é dividido por 2
         for (int i = 0; i < BaralhoUNO.NUMERO_DE_CARTAS_MULTICOR / 2; i++) {
             for (int j = indiceInicialDasFacesMulticor; j < indiceFinalDasFacesMulticor; j++) {
-                Carta cartaUNO = cartaFactory.criarCarta();
+                Carta cartaUNO = CartaFactory.criarCarta(TipoBaralho.UNO);
 
                 FaceEspecialUNO face = FaceEspecialUNO.values()[j];
 
@@ -89,7 +83,7 @@ public class BaralhoUNOBuilder implements BaralhoBuilder {
     }
 
     private void criarCartaTrocaMao() {
-        Carta cartaUNO = cartaFactory.criarCarta();
+        Carta cartaUNO = CartaFactory.criarCarta(TipoBaralho.UNO);
         
         FaceEspecialUNO face = FaceEspecialUNO.TROCAR_MAO;
 

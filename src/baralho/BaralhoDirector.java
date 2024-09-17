@@ -15,7 +15,6 @@ public class BaralhoDirector {
     }
 
     public void construirBaralho(TipoBaralho tipo) {
-        baralhoBuilder.definirFabricaDeCartas();
         baralhoBuilder.montarCartas();
 
         if (tipo == TipoBaralho.UNO) {

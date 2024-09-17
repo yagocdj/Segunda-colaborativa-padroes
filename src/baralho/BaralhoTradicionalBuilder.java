@@ -1,16 +1,15 @@
 package baralho;
 
 import carta.Carta;
-import carta.CartaCreator;
-import carta.CartaTradicionalFactory;
+import carta.CartaFactory;
 import enums.CorCartaTradicional;
 import enums.FaceCartaTradicional;
 import enums.Naipe;
+import enums.TipoBaralho;
 
 public class BaralhoTradicionalBuilder implements BaralhoBuilder {
 
     private BaralhoTradicional baralhoTradicional;
-    private CartaCreator cartaFactory;
 
     public BaralhoTradicionalBuilder() {
         this.baralhoTradicional = new BaralhoTradicional();
@@ -25,7 +24,7 @@ public class BaralhoTradicionalBuilder implements BaralhoBuilder {
     public void montarCartas() {
 
         for (int contagem = 0; contagem < BaralhoTradicional.NUMERO_DE_CARTAS; contagem++) {
-            Carta cartaTradicional = cartaFactory.criarCarta();
+            Carta cartaTradicional = CartaFactory.criarCarta(TipoBaralho.TRADICIONAL);
 
             int indiceNaipe = contagem / BaralhoTradicional.NUMERO_DE_CARTAS_POR_NAIPE;
             int indiceFace = contagem % BaralhoTradicional.NUMERO_DE_CARTAS_POR_NAIPE;
@@ -49,11 +48,6 @@ public class BaralhoTradicionalBuilder implements BaralhoBuilder {
     @Override
     public BaralhoTradicional obterResultado() {
         return this.baralhoTradicional;
-    }
-
-    @Override
-    public void definirFabricaDeCartas() {
-        this.cartaFactory = new CartaTradicionalFactory();
     }
 
     @Override

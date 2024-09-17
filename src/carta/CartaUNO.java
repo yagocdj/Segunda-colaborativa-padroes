@@ -3,7 +3,6 @@ package carta;
 import java.util.List;
 
 import enums.Cor;
-import enums.CorCartaUNO;
 import enums.Naipe;
 
 public class CartaUNO extends Carta {

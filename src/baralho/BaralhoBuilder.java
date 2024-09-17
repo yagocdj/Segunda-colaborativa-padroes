@@ -4,8 +4,6 @@ public interface BaralhoBuilder {
 
     void redefinir();
 
-    void definirFabricaDeCartas();
-
     void montarCartas();
 
     void montarCartasEspeciais();

@@ -3,7 +3,6 @@ package baralho;
 import java.util.Stack;
 
 import carta.Carta;
-import carta.CartaTradicionalFactory;
 
 public class BaralhoTradicional extends Baralho {
 
@@ -14,7 +13,7 @@ public class BaralhoTradicional extends Baralho {
     }
 
     public BaralhoTradicional(int numeroDeCartas, String[] faces, Stack<Carta> cartas) {
-        super(numeroDeCartas, faces, cartas, new CartaTradicionalFactory());
+        super(numeroDeCartas, faces, cartas);
     }
 
 }
