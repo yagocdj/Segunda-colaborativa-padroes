@@ -7,7 +7,8 @@ public enum FaceEspecialUNO implements FaceUNO {
     PULAR("Pular", 20),
     MAIS_DOIS("+2", 20),
     CORINGA("Coringa", 50),
-    MAIS_QUATRO("+4", 50);
+    MAIS_QUATRO("+4", 50),
+    TROCAR_MAO("TrocaMao", 50);
 
     private final String nome;
     private final int valor;
